@@ -27,7 +27,7 @@
         <th>Description</th>
         <th>Calories</th>
     </tr>
-
+    <jsp:useBean id="meals" scope="page" type="java.util.List<ru.javawebinar.topjava.model.MealTo>"/>
     <c:forEach var="meal" items="${meals}">
         <c:if test="${meal.excess == true}">
         <tr style="color: red">
