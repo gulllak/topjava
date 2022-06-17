@@ -26,8 +26,6 @@ public class SpringMain {
             adminUserController.getAll();
 
             MealRestController mealRestController = appCtx.getBean(MealRestController.class);
-            mealRestController.create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410,2));
-
         }
     }
 }

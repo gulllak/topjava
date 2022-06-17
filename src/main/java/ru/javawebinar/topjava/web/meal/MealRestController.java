@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
 
-import java.util.Collection;
+import java.util.List;
 
 @Controller
 public class MealRestController {
@@ -17,23 +17,23 @@ public class MealRestController {
         this.service = service;
     }
 
-    public Meal create(Meal meal) {
-        return service.create(meal);
+    public Meal create(Meal meal, int userId) {
+        return service.create(meal, userId);
     }
 
-    public Meal get(int id) {
-        return service.get(id);
+    public Meal get(int id, int userId) {
+        return service.get(id, userId);
     }
 
-    public Collection<Meal> getAll() {
-        return service.getAll();
+    public List<Meal> getAll(int userId) {
+        return service.getAll(userId);
     }
 
-    public void delete(int id) {
-        service.delete(id);
+    public void delete(int id, int userId) {
+        service.delete(id, userId);
     }
 
-    public void update(Meal meal) {
-        service.update(meal);
+    public void update(Meal meal, int userId) {
+        service.update(meal, userId);
     }
 }
