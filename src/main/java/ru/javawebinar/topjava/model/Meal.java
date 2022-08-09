@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava.model;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,15 +10,15 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @NamedQueries({
-        @NamedQuery(name = Meal.GET, query = "SELECT m FROM Meal m  WHERE m.id =?1 AND m.user.id =?2"),
-        @NamedQuery(name = Meal.GET_All, query = "SELECT m from Meal m left join fetch m.user where m.user.id = ?1"),
+        @NamedQuery(name = Meal.GET_BETWEEN, query = "SELECT m FROM Meal m  WHERE m.user.id =?1 AND m.dateTime >= ?2 AND m.dateTime < ?3 order by m.dateTime DESC"),
+        @NamedQuery(name = Meal.GET_All, query = "SELECT m from Meal m where m.user.id = ?1 ORDER BY m.dateTime DESC"),
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id = ?1 AND m.user.id = ?2"),
 })
 
 @Entity
 @Table(name = "meals")
 public class Meal extends AbstractBaseEntity {
-    public static final String GET = "Meal.get";
+    public static final String GET_BETWEEN = "Meal.get_between";
     public static final String GET_All = "Meal.get_all";
     public static final String DELETE = "Meal.delete";
 
@@ -29,7 +31,7 @@ public class Meal extends AbstractBaseEntity {
     private String description;
 
     @Column(name = "calories")
-    @NotNull
+    @Range
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
